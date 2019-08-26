@@ -1,25 +1,27 @@
 package sqrt_gen
 
 import (
-  //"fmt"
-  "math"
-  )
+	//"fmt"
+	"math"
+)
 
 func Sqrt(x float64, n int) chan float64 {
 	ch := make(chan float64)
-	
-	go func () {
-    z := 1.0
-		for i := 0; i < n; i++ {
+
+	go func() {
+		z := 1.0
+		var old float64
+		for {
 			ch <- z
-			if math.Floor(z*10000)/10000 == math.Floor((z-(z*z - x) / (2*z))*10000)/10000 {
-					break
-				}
-      		z -= (z*z - x) / (2*z)
+			old = z
+			z -= (z*z - x) / (2 * z)
+			if math.Abs(z-old) <= 0.0001 {
+				break
+			}
 		}
 		close(ch)
 	}()
-	
+
 	return ch
 }
 

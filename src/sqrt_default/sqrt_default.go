@@ -7,12 +7,14 @@ import (
 
 func Sqrt(x float64) float64 {
 	z := 1.0
-	for i:=0; i<10; i++ {
+	var old float64
+	for {
 		fmt.Println(z)
-		if math.Floor(z*1000)/1000 == math.Floor((z-(z*z - x) / (2*z))*1000)/1000 {
-			return z
+		old = z
+		z -= (z*z - x) / (2 * z)
+		if math.Abs(z-old) <= 0.0001 {
+			break
 		}
-		z -= (z*z - x) / (2*z)
 	}
 	return z
 }
