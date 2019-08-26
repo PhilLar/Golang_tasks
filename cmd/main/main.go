@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"sqrt_gen"
-	"sqrt_default"
+	"github.com/PhilLar/Golang_tasks/sqrt_gen"
+	"github.com/PhilLar/Golang_tasks/sqrt_default"
 
 )
 
